@@ -1,6 +1,24 @@
-<h1>MI HTML desde main</h1>
-<p>Lista Productos</p>
-<ul>
-    <li class="midlaner">Matee</li>
-    <li>palmitos</li>
-</ul>
+<h1>Lista de Productos</h1>
+
+{{#if response.length}}
+<table class="default">
+
+  <tr>
+
+    <th>Nombre</th>
+
+    <th>Precio</th>
+
+    <th>Foto</th>
+
+  </tr>
+
+    {{#each response}}
+    <tr><td>{{name}}</td> <td>{{price}}</td> <td><img src={{thumbnail}} , width="50" height="50"></td></tr>
+    {{/each}}    
+
+</table>
+{{else}}
+
+<p>No hay productos cargados</p>
+{{/if}}

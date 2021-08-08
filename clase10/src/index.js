@@ -13,10 +13,12 @@ const publicPath = path.resolve(__dirname, "../public")
 app.use(express.static(publicPath))
 
 const layoutFolderPath = path.resolve(__dirname, "../views/layouts")
+const defaultLayerPth = path.resolve(__dirname, "../views/layouts/index.handlebars")
 
 app.set("view engine", "handlebars")
 app.engine("handlebars", handlebars({
-    layoutsDir: layoutFolderPath
+    layoutsDir: layoutFolderPath,
+    defaultLayout: defaultLayerPth
 
 }))
 

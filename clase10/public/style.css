@@ -1,7 +1,7 @@
 /*estilo para todos los tags li*/
 li {
     width: 100px;
-    margin: 400px;
+    margin: 100px;
     padding: 4px;
     list-style: none
   }

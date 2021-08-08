@@ -1,6 +1,5 @@
 import express from "express"
-import { Products } from "../Products";
-import handlebars from "handlebars"
+import { Products } from "../Products"
 
 const router = express.Router()
 
@@ -24,7 +23,7 @@ router.get('/vista', (req, res) => {
             error: 'no hay productos cargados'
         })
     }
-    res.render("main", { layout: "index" })
+    res.render("main", {response})
 });
 
 router.post('/guardar', (req, res) => {
@@ -38,9 +37,8 @@ router.post('/guardar', (req, res) => {
         })
     }
     products.addProduct(name, price, thumbnail)
-    return res.json(
-        products
-    );
+    res.redirect('/')
+    
 });
 
 router.get('/listar/:id', (req, res) => {
