@@ -1,0 +1,67 @@
+<div class='container mt-5'>
+  <div class='row justify-content-center'>
+    <div class='col-12 col-md-5'>
+      <form class='g-3' id='form-chat' action='/api/guardarChat' method='post'>
+
+        <div class='input-group mb-3'>
+          <span class='input-group-text'>Mail</span>
+          <input
+            type='text'
+            id='mail'
+            name='mail'
+            class='form-control'
+            placeholder='Escribe tu mail'
+            aria-label='Mail'
+          />
+          <input type='hidden' name='form' value='true' />
+        </div>
+        <div class='input-group mb-3'>
+          <span class='input-group-text'>Mensaje</span>
+          <input
+            type='text'
+            id='mensaje'
+            name='mensaje'
+            class='form-control'
+            placeholder='Escribe tu mensaje'
+            aria-label='Mensaje'
+          />
+        </div>
+        <div class='input-group mb-3'>
+          <span class='input-group-text'>Hora</span>
+          <input
+            type='text'
+            id='hora'
+            name='hora'
+            class='form-control'
+            placeholder='Escribe la hora'
+            aria-label='Hora'
+          />
+        </div>
+
+        <div class='col-12'>
+          <button class='btn btn-primary' type='submit'>Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class='container mt-5'>
+  <div class='row justify-content-center'>
+    <div class='col-12 col-md-7'>
+      <table
+        class='table align-middle table-dark table-striped table-bordered text-center'
+      >
+        <thead>
+          <tr>
+            <th scope='col'>Mail</th>
+            <th scope='col'>Mensaje</th>
+            <th scope='col'>Hora</th>
+          </tr>
+        </thead>
+        <tbody id='chat'>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+const chat = []
+
+export {chat}
