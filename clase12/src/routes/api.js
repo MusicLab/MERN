@@ -1,9 +1,7 @@
 import express from 'express';
 import Producto from './../class/producto.js';
-import Chat from "./../class/chat.js";
 import { contenido } from '../modules/app.js';
 import { productos, dbIDs, lastID } from '../modules/data.js';
-import { chat } from '../modules/chatData.js';
 
 const router = express.Router();
 
@@ -63,46 +61,6 @@ router.get('/productos/listar/:id', (req, res) => {
 });
 
 //Ruta para guardar un producto nuevo si se cumplen los parámetros necesarios.
-
-
-router.post('/guardarChat', (req, res) => {
-  const body = req.body;
-  const msgErrorParametros = 'Parámetros no validos';
-  const errorGuardar = (msg) => {
-    return res.status(400).json({
-      error: msg,
-    });
-  };
-
-  if (body.mail === undefined) {
-    errorGuardar('Mail no definido');
-  }
-
-  if (body.mensaje === undefined) {
-    errorGuardar('Mensaje no definido');
-  }
-
-
-  if (body.hora === undefined) {
-    errorGuardar('No pusiste hora');
-  }
-
-  const objChat = new Chat(
-    body.mail,
-    body.mensaje,
-    body.hora,
-  );
-  chat.push(objChat);
-  res.redirect(301, '/')
-  
-});
-
-
-
-
-
-
-
 router.post('/guardar', (req, res) => {
   const body = req.body;
   const msgErrorParametros = 'Parámetros no validos';

@@ -27,9 +27,6 @@ export const initWsServer = (server) => {
       // socket.broadcast.emit('messages', messages);
     });
 
-    
-    
-    
     socket.on('askProducts', () => {
       console.log('Envie los productos');
       if (productos.length > 0) {

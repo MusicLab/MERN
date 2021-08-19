@@ -31,3 +31,27 @@ submit.addEventListener('submit', (e) => {
   socket.emit('new-product', inputs);
 });
 
+render = (data) => {
+  let listProduct = document.getElementById('list-Product');
+  let newElement = document.createElement('tr');
+  let htmlProducto = `
+    <td>${data.title}</td>
+    <td>${data.price}</td>
+    <td>
+      <div class='text-center wd-100'>
+        <div
+          class='card'
+          style='width: 4rem; margin-left: auto; margin-right: auto;'
+        >
+          <img
+            src='${data.thumbnail}'
+            class='card-img-top mx-auto d-block'
+            alt='...'
+          />
+        </div>
+      </div>
+    </td>
+    `;
+  newElement.innerHTML = htmlProducto;
+  listProduct.appendChild(newElement);
+};
