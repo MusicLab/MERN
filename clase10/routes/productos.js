@@ -1,12 +1,13 @@
-import express from "express"
-import { Products } from "../Products"
+const { response } = require("express");
+const express = require("express")
+const Products = require("../Products.js")
 
 const router = express.Router()
 
 const products = new Products()
 
 
-router.get('/listar', (req, res) => {   
+router.get('/productos/', (req, res) => {   
     const response = products.getProducts()
     if (!response.length > 0) {
         return res.status(400).json({
@@ -16,7 +17,7 @@ router.get('/listar', (req, res) => {
     res.json(response)
 });
 
-router.get('/vista', (req, res) => {   
+router.get('/productos/vistas', (req, res) => {   
     const response = products.getProducts()
     if (!response.length > 0) {
         return res.status(400).json({
@@ -26,7 +27,7 @@ router.get('/vista', (req, res) => {
     res.render("main", {response})
 });
 
-router.post('/guardar', (req, res) => {
+router.post('/productos/', (req, res) => {
     const { name, price, thumbnail } = req.body;
     const body = req.body
     const numeroConvertido = Number(body.price)
@@ -36,12 +37,13 @@ router.post('/guardar', (req, res) => {
             error: 'Deben ingresar name: string ,price: number y thumbnail: string'
         })
     }
-    products.addProduct(name, price, thumbnail)
-    res.redirect('/')
+    res.json(products.addProduct(name, price, thumbnail))
+    
+    
     
 });
 
-router.get('/listar/:id', (req, res) => {
+router.get('/productos/:id', (req, res) => {
     const { id } = req.params
     const response = products.getProductById(id);
     if (!response) {
@@ -52,7 +54,7 @@ router.get('/listar/:id', (req, res) => {
     res.json(response)
 });
 
-router.put("/actualizar/:id", (req, res) => {
+router.put("/productos/:id", (req, res) => {
     const { id } = req.params
     const body = req.body
     const response = products.getProductById(id)
@@ -82,7 +84,7 @@ router.put("/actualizar/:id", (req, res) => {
     res.json(response)
 })
 
-router.delete("/borrar/:id", (req, res) => {
+router.delete("/productos/:id", (req, res) => {
     const { id } = req.params
     const response = products.getProductById(id)
     if (!response) {
@@ -94,15 +96,6 @@ router.delete("/borrar/:id", (req, res) => {
     res.json(response)
 })
 
-router.get('/listar', (req, res) => {   
-    const response = products.getProducts()
-    if (!response.length > 0) {
-        return res.status(400).json({
-            error: 'no hay productos cargados'
-        })
-    }
-    res.json(response)
-});
 
 
-export default router
+module.exports = router

@@ -1,4 +1,4 @@
-export class Products {
+module.exports = class Products {
     constructor() {
         this.products = []
     }
@@ -17,12 +17,14 @@ export class Products {
 
     addProduct(name, price, thumbnail) {
         console.log(this.products)
-        this.products.push({
+        const product = {
             name: name,
             price: price,
             thumbnail: thumbnail,
             id: this.products.length + 1
-        })
+        }
+        this.products.push(product)
+        return product
     }
     
     deleteProduct(id) {
