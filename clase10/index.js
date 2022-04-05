@@ -1,7 +1,7 @@
 const express = require("express")
 const routerProductos = require("./routes/productos.js")
 const path = require("path")
-
+const cors = require('cors');
 const port = 8080;
 
 const app = express();
@@ -24,8 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", routerProductos)
 
+app.use(cors());
+
+
 app.use(express.static(__dirname + "/public")); 
 
-app.get("/asd", (req, res) => {
-    res.sendFile(__dirname + "/public/index.html")
-})
+
