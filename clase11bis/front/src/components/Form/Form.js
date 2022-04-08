@@ -1,28 +1,19 @@
-import React, {useState} from 'react'
+import React, {useContext} from 'react'
+import {DataContext} from "../../Context/Context"
 
 
 
 
 const Form = () => {
-    const [nombreProducto, setNombreProducto] = useState("")
-    const [precioProducto, setPrecioProducto] = useState("")
+  const {nombreProducto, setNombreProducto, precioProducto, setPrecioProducto} = useContext(DataContext)
     const cambiarNombreProducto = (e) => {
         const value = e.target.value
-        console.log(value)
         setNombreProducto(value)
     }
     const cambiarPrecioProducto = (e) => {
         const value = e.target.value
-        console.log(value)
         setPrecioProducto(value)
     }
-    // const guardarProducto = (event) => {
-    //     event.preventDefault()
-    //     console.log("estos son los dos estados:", nombreProducto, precioProducto)
-    //     setNombreProducto("")
-    //     setPrecioProducto("")
-    // }
-
 
     const guardarProducto = async (event) => {
         event.preventDefault()

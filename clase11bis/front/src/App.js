@@ -1,18 +1,21 @@
 import './App.css';
-import Form from "./components/Form/Form"
-import ProductList from "./components/ProductList/ProductList"
-import React, { useEffect, useState } from 'react';
+import Form from "./Components/Form/Form"
+import ProductList from "./Components/ProductList/ProductList"
+import React from 'react';
+import {DataProvider} from "./Context/Context"
 
 function App() {
   
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <Form></Form>
-        <ProductList></ProductList>
-      </header>
-    </div>
+    <DataProvider>
+      <div className="App">
+        <header className="App-header">
+          <Form></Form>
+          <ProductList></ProductList>
+        </header>
+      </div>
+    </DataProvider>
   );
 }
 
