@@ -22,10 +22,9 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", routerProductos)
-
 app.use(cors());
 
+app.use("/api", routerProductos)
 
 app.use(express.static(__dirname + "/public")); 
 
