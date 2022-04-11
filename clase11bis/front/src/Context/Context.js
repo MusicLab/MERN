@@ -7,6 +7,8 @@ export const DataContext = React.createContext()
 export const DataProvider = ({ children }) => {
     const [nombreProducto, setNombreProducto] = useState("")
     const [precioProducto, setPrecioProducto] = useState("")
+    const [products, setProducts] = useState(0)
+
     
 
   return (
@@ -14,7 +16,9 @@ export const DataProvider = ({ children }) => {
         nombreProducto,
         setNombreProducto,
         precioProducto,
-        setPrecioProducto
+        setPrecioProducto,
+        products,
+        setProducts
         }}>
         { children }
     </DataContext.Provider>

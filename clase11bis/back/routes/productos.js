@@ -17,15 +17,7 @@ router.get('/productos/', (req, res) => {
     res.json(response)
 });
 
-router.get('/productos/vistas', (req, res) => {   
-    const response = products.getProducts()
-    if (!response.length > 0) {
-        return res.status(400).json({
-            error: 'no hay productos cargados'
-        })
-    }
-    res.render("main", {response})
-});
+
 
 router.post('/productos/', (req, res) => {
     const { name, price, thumbnail } = req.body;
