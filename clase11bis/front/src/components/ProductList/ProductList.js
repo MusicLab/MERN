@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import {DataContext} from "../../Context/Context"
 import io from "socket.io-client"
+import "./ProductList.css"
 
 const ProductList = () => {
   
@@ -59,12 +60,11 @@ const ProductList = () => {
     const socket = io("//localhost:8080")
     socket.on("products", () =>{
       getData()
-      
-
-      
-       
+      console.log("products have been arrive from server")
+      console.log(responseData)
     })
-  }, [products])
+    return () => {socket.off()}
+  }, [responseData])
   
 
   
@@ -82,12 +82,15 @@ const ProductList = () => {
 
 
   return (
-    <div>
+    <div >
       {responseData.length > 0 && responseData.map(product =>{
         return(
-        <li>
-          {product.name} {product.price}
-        </li>)
+        <div className="ProducList-div">
+          <p>{product.name}</p>
+          <p>{product.price}</p>
+          <img className="Img-Source" src={product.thumbnail} alt={product.name}></img>
+            
+        </div>)
       })}
     </div>
   )

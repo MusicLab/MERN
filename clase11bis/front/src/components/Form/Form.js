@@ -6,7 +6,7 @@ import io from "socket.io-client"
 
 
 const Form = () => {
-  const {products, setProducts, nombreProducto, setNombreProducto, precioProducto, setPrecioProducto} = useContext(DataContext)
+  const {products, setProducts, nombreProducto, setNombreProducto, precioProducto, setPrecioProducto, fotoProducto, setFotoProducto} = useContext(DataContext)
   const cambiarNombreProducto = (e) => {
       const value = e.target.value
       setNombreProducto(value)
@@ -15,6 +15,10 @@ const Form = () => {
       const value = e.target.value
       setPrecioProducto(value)
   }
+  const cambiarFotoProducto = (e) => {
+    const value = e.target.value
+    setFotoProducto(value)
+}
 
   const guardarProducto = async (event) => {
       event.preventDefault()
@@ -27,12 +31,13 @@ const Form = () => {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Credentials': 'true'
         },
-        body: JSON.stringify({name: nombreProducto, price: precioProducto, thumbnail:"https://www.google.com/url?sa=i&url=https%3A%2F%2Flotuspc.com.ar%2Fproduct%2Fsony-playstation-4-1tb-standard%2F&psig=AOvVaw0YCY7RUGW8-i6isgkYuhZm&ust=1649447997731000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCNCBluHegvcCFQAAAAAdAAAAABAH"}),
+        body: JSON.stringify({name: nombreProducto, price: precioProducto, thumbnail:fotoProducto}),
       })
       const data = await response.json()
       console.log(data)
       setNombreProducto("")
       setPrecioProducto("")
+      setFotoProducto("")
       setProducts(products + 1)
       console.log(products)
       
@@ -42,11 +47,11 @@ const Form = () => {
   
   useEffect(()=>{
     const socket = io("//localhost:8080")
-
+    socket.on("product-added", "mensaje")
     socket.emit("product-added", () =>{
       console.log("product added")     
     })
-  }, [products])
+  }, [])
 
 
 
@@ -55,6 +60,7 @@ const Form = () => {
         <form onSubmit={guardarProducto}>
             <input id= "Nombre" placeholder="Producto" type="text" name="nombre" value={nombreProducto} onChange={cambiarNombreProducto}/>
             <input id= "Precio" placeholder="Precio" type="number" name="precio" value={precioProducto} onChange={cambiarPrecioProducto}/>
+            <input id= "Foto" placeholder="Foto" type="text" name="foto" value={fotoProducto} onChange={cambiarFotoProducto}/>
             <button type="Submit">Guardar</button>
         </form>        
     </div>

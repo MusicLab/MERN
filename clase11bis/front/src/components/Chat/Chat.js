@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from "socket.io-client"
 
 
@@ -6,12 +6,17 @@ import io from "socket.io-client"
 const Chat = () => {
   const [messagesReact, setMessagesReact] = useState("")
 
-  // const socket = io.connect("//localhost:8080")
-  // socket.on("connection", () =>{
-  //   socket.on("messages", (messages) =>{
-  //     setMessagesReact(messages)
-  //   })
-  // })
+  useEffect(()=>{
+    const socket = io.connect("//localhost:8080")
+    socket.on("connection", () =>{
+      socket.on("messages", (messages) =>{
+        setMessagesReact(messages)
+        console.log(messages)
+      })
+  })
+
+  }, [messagesReact])
+  
   
   
   // const sendMessage = () => {

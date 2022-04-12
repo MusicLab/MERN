@@ -1,0 +1,13 @@
+.ProducList-div{
+    display:flex;
+    align-items:center;
+    flex-direction: row;
+    padding: 20px
+}
+
+
+.Img-Source {
+    max-width: 2rem;
+    object-fit: contain;
+    height:10rem
+}

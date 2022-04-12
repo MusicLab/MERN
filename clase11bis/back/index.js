@@ -42,12 +42,13 @@ io.on("connection", (socket)=>{
   socket.emit("products", ()=>{
     console.log("deploy products on connection")
   })
+  socket.emit("messages", messages)
   socket.on("product-added", ()=> {
-    socket.emit("products", ()=>{
-      console.log("product added")
-    })
+    console.log("message from client has been arrived")
+    let log = console.log("llega")
+    io.emit("products", log)
+})
 
-  })
   
   // socket.emit("messages", messages)
   // socket.on("new-message", (message)=> {
