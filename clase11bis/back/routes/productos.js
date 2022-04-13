@@ -1,13 +1,13 @@
-const { response } = require("express");
-const express = require("express")
-const Products = require("../Products.js")
+import { response } from "express"
+import express from "express"
+import Products from "../Products.js"
 
-const router = express.Router()
+const routerProductos = express.Router()
 
 const products = new Products()
 
 
-router.get('/productos/', (req, res) => {   
+routerProductos.get('/productos/', (req, res) => {   
     const response = products.getProducts()
     if (!response.length > 0) {
         return res.status(400).json({
@@ -19,7 +19,7 @@ router.get('/productos/', (req, res) => {
 
 
 
-router.post('/productos/', (req, res) => {
+routerProductos.post('/productos/', (req, res) => {
     const { name, price, thumbnail } = req.body;
     const body = req.body
     const numeroConvertido = Number(body.price)
@@ -35,7 +35,7 @@ router.post('/productos/', (req, res) => {
     
 });
 
-router.get('/productos/:id', (req, res) => {
+routerProductos.get('/productos/:id', (req, res) => {
     const { id } = req.params
     const response = products.getProductById(id);
     if (!response) {
@@ -46,7 +46,7 @@ router.get('/productos/:id', (req, res) => {
     res.json(response)
 });
 
-router.put("/productos/:id", (req, res) => {
+routerProductos.put("/productos/:id", (req, res) => {
     const { id } = req.params
     const body = req.body
     const response = products.getProductById(id)
@@ -76,7 +76,7 @@ router.put("/productos/:id", (req, res) => {
     res.json(response)
 })
 
-router.delete("/productos/:id", (req, res) => {
+routerProductos.delete("/productos/:id", (req, res) => {
     const { id } = req.params
     const response = products.getProductById(id)
     if (!response) {
@@ -90,4 +90,4 @@ router.delete("/productos/:id", (req, res) => {
 
 
 
-module.exports = router
+export default routerProductos

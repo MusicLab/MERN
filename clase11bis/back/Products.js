@@ -1,4 +1,4 @@
-module.exports = class Products {
+export default class Products {
     constructor() {
         this.products = []
     }

@@ -6,11 +6,16 @@ import { socket } from '../services/sockets';
 const ProductList = () => {
   
   
-
+  console.log(socket)
   
 
   const {products, setProducts} = useContext(DataContext)
   const [responseData, setResponseData] = useState([]);
+
+  socket.on("products", () =>{
+    getData()
+    console.log("products have been arrive from server")
+  })
 
   // useEffect(()=>{
   //   const socket = io("//localhost:8080")
@@ -57,12 +62,13 @@ const ProductList = () => {
   }
 
   useEffect(()=>{
+    
     socket.on("products", () =>{
       getData()
       console.log("products have been arrive from server")
     })
     return () => {socket.off()}
-  }, [responseData])
+  }, [])
   
 
   return (
