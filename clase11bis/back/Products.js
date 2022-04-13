@@ -4,7 +4,6 @@ module.exports = class Products {
     }
 
     getProducts() {
-        console.log(this.products)
         return this.products
     }
 
@@ -16,7 +15,6 @@ module.exports = class Products {
     }
 
     addProduct(name, price, thumbnail) {
-        console.log(this.products)
         const product = {
             name: name,
             price: price,

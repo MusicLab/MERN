@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import {DataContext} from "../../Context/Context"
-import io from "socket.io-client"
 import "./ProductList.css"
+import { socket } from '../services/sockets';
 
 const ProductList = () => {
   
@@ -57,29 +57,13 @@ const ProductList = () => {
   }
 
   useEffect(()=>{
-    const socket = io("//localhost:8080")
     socket.on("products", () =>{
       getData()
       console.log("products have been arrive from server")
-      console.log(responseData)
     })
     return () => {socket.off()}
   }, [responseData])
   
-
-  
-  //   const data = await response.json()
-  //   getData()
-  //   setProducts(data)
-  //   console.log("products", products)
-  // }
-  // const socket = io("//localhost:8080")
-  //   socket.on("connection", "buenas")
-  //   socket.on("products", ()=>{
-            
-  //   })
-
-
 
   return (
     <div >
