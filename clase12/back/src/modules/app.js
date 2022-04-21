@@ -1,4 +1,5 @@
 const fs = require('fs');
+import Producto from '../class/producto.js';
 import path from 'path';
 const publicPathFolder = path.resolve(__dirname, './../../public/');
 const publicPathFileName = path.resolve(
