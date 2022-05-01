@@ -1,0 +1,14 @@
+use ecommerce
+db.createCollection("messages")
+db.createCollection("products")
+db.messages.insert([{"email": "baruffa_89@hotmail.com", "message": "Cosa de Mandinga"},
+{"email": "bot@gmail.com", "message": "buenas"},
+{"email": "baruffa_89@hotmail.com", "message": "que talco?"},
+{"email": "bot@gmail.com", "message": "todo bailable"},
+{"email": "baruffa_89@hotmail.com", "message": "optimo, tenes planes para hoy?"},
+{"email": "bot@gmail.com", "message": "tratar de conquistar el mundo"},
+{"email": "baruffa_89@hotmail.com", "message": "Me puedo sumar?"},
+{"email": "bot@gmail.com", "message": "Multiplicate"},
+{"email": "baruffa_89@hotmail.com", "message": "Roger that"},
+{"email": "bot@gmail.com", "message": "Disculpa no te entendi quizo decir Roger Rabbit?"},
+{"email": "baruffa_89@hotmail.com", "message": "No pelotudo, nos vemos"}])

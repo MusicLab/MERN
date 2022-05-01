@@ -3,6 +3,10 @@ import path from 'path'
 import router from './routes';
 import cors from 'cors';
 import { initWsServer } from './services/socket';
+import knexProducts from "./db/products"
+import knex from 'knex';
+
+knexProducts
 
 
 const PUBLIC_PATH = path.resolve(__dirname, '../public')
