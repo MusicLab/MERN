@@ -40,19 +40,20 @@ const knexMessages = knex({
 //     })
 
 
-// knexProducts.schema.dropTableIfExists("allProducts")
-//     .finally(()=>{
-//         return knexProducts.schema.createTable("allProducts", table => {
-//             table.string("name")
-//             table.float("price")
-//             table.string("thumbnail")
-//             table.string("code")
-//             table.string("description")
-//             table.integer("stock")
-//             table.timestamps(true, true)
-//             table.increments("id").primary
-//         })
-//     })
+
+knexProducts.schema.dropTableIfExists("allProducts")
+    .finally(()=>{
+        return knexProducts.schema.createTable("allProducts", table => {
+            table.string("name")
+            table.float("price")
+            table.string("thumbnail")
+            table.string("code")
+            table.string("description")
+            table.integer("stock")
+            table.timestamps(true, true)
+            table.increments("id").primary
+        })
+    })
 
 
 
