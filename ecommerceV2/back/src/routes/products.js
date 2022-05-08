@@ -1,5 +1,4 @@
-import express, { Request, Response } from 'express';
-import {products} from '../controllers/Products'
+import express from 'express';
 import { isAdmin } from './../middlewares/isAdmin';
 import {productsDao}  from "../daos/index"
 
@@ -9,15 +8,20 @@ router.get('/:id?', async (req, res) => {
     const { id } = req.params
     if (id) {
         try {
-            const data = await products.getById(Number(id))
+            const data = await productsDao.getById(id)
             res.json(data)
         } catch (error) {
             let msg = (error).message;
             return res.status(400).json({ error: msg });
         }
     } else {
-        const data = await productsDao.getAll()
-        res.json(data)
+        try {
+            const data = await productsDao.getAll()
+            res.json(data)
+        } catch (error) {
+            let msg = (error).message
+            return res.status(400).json({ error: msg })
+        }
     }
 });
 
@@ -44,8 +48,8 @@ router.put('/:id', isAdmin, async (req, res) => {
         body
     } = req
     if (body.name || body.price || body.thumbnail || body.code || body.description || body.stock) {
-        const response = await products.updateProduct(
-            Number(id), body
+        const response = await productsDao.updateProduct(
+            id, body
         )
         res.json(response)
     } else {
@@ -53,18 +57,28 @@ router.put('/:id', isAdmin, async (req, res) => {
     }
 });
 
-router.delete('/:id', isAdmin, async (req, res) => {
+router.delete('/:id?', isAdmin, async (req, res) => {
     const {
         params: { id }
     } = req
-    try {
-        const response = await products.deleteById(Number(id))
-        res.json(response)
-    } catch (error) {
-        let msg = (error).message;
-        return res.status(400).json({ error: msg });
+    if (id) {
+        try {
+            const response = await productsDao.deleteById(id)
+            res.json(response)
+        } catch (error) {
+            let msg = (error).message;
+            return res.status(400).json({ error: msg });
+        }
     }
-
+    else {
+        try {
+            const response = await productsDao.deleteAll()
+            res.json(response)
+        } catch(error) {
+            let msg = (error).message
+            return res.status(400).json({error:msg})
+        }
+    }
 });
 
 export default router

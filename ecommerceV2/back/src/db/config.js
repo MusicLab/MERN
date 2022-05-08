@@ -1,5 +1,8 @@
 import knex from "knex"
 import path from "path"
+import mongoose from "mongoose"
+
+const mongo = mongoose.connect("mongodb://localhost:27017/ecommerce")
 
 const dbPath = path.resolve(__dirname, '../../mydb.sqlite');
 
@@ -15,6 +18,7 @@ const knexProducts = knex({
     },
     pool: { min:0, max:7 } 
 })
+
 
 
 const knexMessages = knex({
@@ -41,20 +45,20 @@ const knexMessages = knex({
 
 
 
-knexProducts.schema.dropTableIfExists("allProducts")
-    .finally(()=>{
-        return knexProducts.schema.createTable("allProducts", table => {
-            table.string("name")
-            table.float("price")
-            table.string("thumbnail")
-            table.string("code")
-            table.string("description")
-            table.integer("stock")
-            table.timestamps(true, true)
-            table.increments("id").primary
-        })
-    })
+// knexProducts.schema.dropTableIfExists("allProducts")
+//     .finally(()=>{
+//         return knexProducts.schema.createTable("allProducts", table => {
+//             table.string("name")
+//             table.float("price")
+//             table.string("thumbnail")
+//             table.string("code")
+//             table.string("description")
+//             table.integer("stock")
+//             table.timestamps(true, true)
+//             table.increments("id").primary
+//         })
+//     })
 
 
 
-export {knexProducts, knexMessages}
+export {knexProducts, mongo, knexMessages}

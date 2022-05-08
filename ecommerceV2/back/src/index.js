@@ -2,8 +2,6 @@ import express from 'express';
 import path from 'path'
 import router from './routes';
 import { initWsServer } from './controllers/socket';
-import mongoose from "mongoose"
-import productModel from "./models/product"
 import "dotenv/config"
 
 

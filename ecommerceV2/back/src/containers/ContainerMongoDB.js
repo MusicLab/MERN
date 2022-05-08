@@ -2,11 +2,6 @@ import mongoose from "mongoose"
 
 
 
-mongoose.connect("mongodb://localhost:27017/ecommerce")
-
-
-
-
 export default class ContainerMongoDB {
     constructor(collectionName, schema) {
         this.collection = mongoose.model(collectionName, schema)
@@ -19,6 +14,7 @@ export default class ContainerMongoDB {
                 throw new Error("error at listing by Id, not found")
             } else {
                 return docs
+                
             }
         } catch (error) {
             throw new Error(`error at listing by Id ${error}`)
@@ -35,6 +31,25 @@ export default class ContainerMongoDB {
 
     async save(product) {
         const doc = await this.collection.create(product)
+    }
+    
+    // todo manejo de errores
+    async updateProduct(id, body) {
+        try {
+            const docs = await this.collection.findOneAndUpdate({ "_id": id }, {$set: body})
+            
+            
+        } catch (error) {
+            throw new Error(error, "error updating product")
+        }
+    }
+
+    async deleteAll() {
+        try {
+            await this.collection.deleteMany()
+        } catch (error) {
+            throw new Error(error, "error deleting all products")
+        }
     }
 }
 

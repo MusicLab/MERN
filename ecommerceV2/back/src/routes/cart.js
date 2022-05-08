@@ -1,13 +1,26 @@
 import express, { Request, Response } from 'express';
 import Carts from '../controllers/Carts'
 import path from 'path';
+import cartsDao from "../daos/index"
+import cartDao from "../daos/index"
 
 const PUBLIC_PATH = path.join(__dirname, '../', 'carts.txt')
 
 const carts = new Carts(PUBLIC_PATH)
 
 const router = express.Router()
+console.log(cartsDao)
 
+router.get('/cart', async (req, res) => {
+    try {
+        const request = await cartDao.getAll()
+        console.log("entro")
+        return request
+    } catch (error) {
+        let msg = (error).message;
+        return res.status(400).json({ error: msg });
+    }
+})
 router.post('/', async (Request, Response) => {
     try {
         const request = await carts.save()
@@ -36,7 +49,7 @@ router.get('/:id/productos', async (req, res) => {
         params: { id }
     } = req
     try {
-        const { products } = await carts.getById(Number(id))
+        const { products } = await cartsDaoMongoDB.getById(Number(id))
         res.json(products)
     } catch (error) {
         let msg = (error).message;

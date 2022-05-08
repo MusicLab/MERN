@@ -1,10 +1,3 @@
-import knex from "knex"
-
-
-
-
-
-
 export default class ContainerMariaDB {
    
     constructor(connection, table) {
@@ -17,12 +10,18 @@ export default class ContainerMariaDB {
     }
 
     async getById(id) {
-        let data = await this.connection.from(this.table).select("*").where("id" , id)
-        if (data.length > 0) {
-            return data
-        }
-        else {
-            throw new Error(`producto con id ${id} no encontrado`)
+        try {
+            let data = await this.connection.from(this.table).select("*").where("id" , id)
+            if (data.length > 0) {
+                console.log("aca")
+                return data
+            }
+            else {
+                throw new Error(`product with id: ${id} not found`)
+            }
+
+        } catch (error) {
+            throw new Error(`error at listing by Id ${error}`)
         }
     }
 
@@ -46,13 +45,17 @@ export default class ContainerMariaDB {
     }
 
     async updateProduct(id, body) {
-        let data = await this.connection.from(this.table).select("*").where("id" , id)
-        if (data.length > 0) {
-            let data = await this.connection.from(this.table).select("*").where("id" , id).update(body)
-            return data
-        }
-        else {
-            throw new Error(`producto con id ${id} no encontrado`)
+        try {
+            let data = await this.connection.from(this.table).select("*").where("id" , id)
+            if (data.length > 0) {
+                let data = await this.connection.from(this.table).select("*").where("id" , id).update(body)
+                return data
+            }
+            else {
+                throw new Error(`error in body or id ${id} ${body}`)
+            }
+        } catch (error) {
+            throw new Error(`error at listing by Id ${error}`)
         }
     }
     async deleteAll() {
@@ -61,5 +64,3 @@ export default class ContainerMariaDB {
         
 }
 
-
-export const ContainerMariaDB = new Products(knexProducts, "allProducts")
