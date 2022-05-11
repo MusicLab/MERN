@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 
 
-export default class ContainerMongoDB {
+export default class ContainerCartsMongoDB {
     constructor(collectionName, schema) {
         this.collection = mongoose.model(collectionName, schema)
     }
@@ -29,8 +29,14 @@ export default class ContainerMongoDB {
         }
     }
 
-    async save(product) {
-        const doc = await this.collection.create(product)
+    async save() {
+        const doc = await this.collection.create()
+    }
+
+    async saveProduct(product) {
+        console.log(product)
+        id = "627ac3adeaddfcdf48c611a7"
+        const doc = await this.collection.updateOne({"_id": ObjectId("627ac3adeaddfcdf48c611a7") }, {$push:{"productsIn": product}})
     }
     
     // todo manejo de errores

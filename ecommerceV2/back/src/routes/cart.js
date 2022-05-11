@@ -1,35 +1,44 @@
-import express, { Request, Response } from 'express';
-import Carts from '../controllers/Carts'
-import path from 'path';
-import cartsDao from "../daos/index"
-import cartDao from "../daos/index"
+import express from 'express';
+import {cartsDao} from "../daos/index"
+import {productsDao} from "../daos/index"
 
-const PUBLIC_PATH = path.join(__dirname, '../', 'carts.txt')
 
-const carts = new Carts(PUBLIC_PATH)
 
 const router = express.Router()
-console.log(cartsDao)
 
-router.get('/cart', async (req, res) => {
+
+router.get('/', async (req, res) => {
     try {
-        const request = await cartDao.getAll()
-        console.log("entro")
-        return request
+        const data = await cartsDao.getAll()
+        res.json(data)
+    } catch (error) {
+        let msg = (error).message
+        return res.status(400).json({ error: msg })
+    }
+})
+router.post('/', async (req, res) => {
+    try {
+        const request = await cartsDao.save()
+        res.status(201).json({ message: 'the cart has been succesfull created', cartId: request })
     } catch (error) {
         let msg = (error).message;
         return res.status(400).json({ error: msg });
     }
 })
-router.post('/', async (Request, Response) => {
+
+router.get('/:id/products', async (req, res) => {
+    const {
+        params: { id }
+    } = req
     try {
-        const request = await carts.save()
-        res.status(201).json({ message: 'se creo correctamente el carrito', cartId: request })
+        const { products } = await cartsDao.getById(id)
+        res.json(products)
     } catch (error) {
         let msg = (error).message;
         return res.status(400).json({ error: msg });
     }
-})
+});
+
 
 router.delete('/:id', async (req, res) => {
     const {
@@ -49,7 +58,7 @@ router.get('/:id/productos', async (req, res) => {
         params: { id }
     } = req
     try {
-        const { products } = await cartsDaoMongoDB.getById(Number(id))
+        const { products } = await cartDao.getById(Number(id))
         res.json(products)
     } catch (error) {
         let msg = (error).message;
@@ -57,13 +66,11 @@ router.get('/:id/productos', async (req, res) => {
     }
 });
 
-router.post('/:id/productos', async (req, res) => {
-    const { body: { products }, params: { id } } = req
+router.post('/:id', async (req, res) => {
+    const { params: { id } } = req
     try {
-        const request = await carts.updateCart(
-            Number(id),
-            products
-        )
+        const product = await productsDao.getById(id)
+        const request = await cartsDao.saveProduct(product)
         res.status(201).json(request)
     } catch (error) {
         let msg = (error).message;

@@ -42,7 +42,7 @@ db.messages.insertMany([{"email": "baruffa_89@hotmail.com", "message": "Cosa de 
 {"email": "bot@gmail.com", "message": "Disculpa no te entendi quizo decir Roger Rabbit?"},
 {"email": "baruffa_89@hotmail.com", "message": "No pelotudo, nos vemos"}])
 
-db.products.insertMany([{"name": "Playstation", "price": 356, "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCb3_jyGzpgchsIedoDqGp2HIRu05PjAYUQA&usqp=CAU", "code": "Asd567", "description": "siempre segundera", "stock": "20"},
+db.cart.insertMany([{"name": "Playstation", "price": 356, "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCb3_jyGzpgchsIedoDqGp2HIRu05PjAYUQA&usqp=CAU", "code": "Asd567", "description": "siempre segundera", "stock": "20"},
 {"name": "Nintendo 64", "price": 900, "thumbnail": "https://media.vandal.net/m/11-2019/2019111419404532_1.jpg", "code": "Asd597", "description": "la mejor consola que existio", "stock": "45"},
 {"name": "Zelda Ocarina of time", "price": 1200, "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8UsGtfIChVUB2lJL9oXP1LZ6PtSciSinxEQ&usqp=CAU", "code": "Asd598", "description": "El mejor juego de la historia", "stock": "100"},
 {"name": "Final Fantasy VII", "price": 1600, "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPJbL5flgC2clL41VOCwkgITKVWlFUCqgaQg&usqp=CAU", "code": "Afd599", "description": "El segundo mejor juego de la historia", "stock": "55"},

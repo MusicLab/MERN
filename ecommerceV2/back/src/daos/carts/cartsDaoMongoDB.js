@@ -1,14 +1,14 @@
-import ContainerMongoDB from "../../containers/ContainerMongoDB"
-import cartDaoMongoDB from "../carts/cartDaoMongoDB"
-import cartDao from "../index"
+import ContainerCartsMongoDB from "../../containers/ContainerProductsMongoDB"
+import productsDaoMongoDB from "../products/productsDaoMongoDB"
 
 
-class CartsDaoMongoDB extends ContainerMongoDB {
+
+
+class CartsDaoMongoDB extends ContainerCartsMongoDB {
     constructor() {
-        super(
-            "carts", {carts: []} 
-        )
+        super("carts", {"productsIn" : [{}]})
     }
+
 
 }
 

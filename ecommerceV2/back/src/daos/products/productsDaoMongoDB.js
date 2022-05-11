@@ -1,6 +1,6 @@
-import ContainerMongoDB from "../../containers/ContainerMongoDB"
+import ContainerProductsMongoDB from "../../containers/ContainerProductsMongoDB"
 
-class ProductsDaoMongoDB extends ContainerMongoDB {
+class ProductsDaoMongoDB extends ContainerProductsMongoDB {
     constructor() {
         super("products", {
             name: {type: String, required: true},
