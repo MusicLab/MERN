@@ -9,43 +9,40 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
     try {
-        const data = await cartsDao.getAll()
-        res.json(data)
+        const request = await cartsDao.getAll()
+        res.json(request)
     } catch (error) {
         let msg = (error).message
         return res.status(400).json({ error: msg })
     }
 })
-router.post('/', async (req, res) => {
+
+router.get('/:id', async (req, res) => {
+    const { id } = req.params
     try {
-        const request = await cartsDao.save()
-        res.status(201).json({ message: 'the cart has been succesfull created', cartId: request })
+        const products = await cartsDao.getById(id)
+        res.json(products)
     } catch (error) {
         let msg = (error).message;
         return res.status(400).json({ error: msg });
     }
 })
 
-router.get('/:id/products', async (req, res) => {
-    const {
-        params: { id }
-    } = req
+router.post('/', async (req, res) => {
     try {
-        const { products } = await cartsDao.getById(id)
-        res.json(products)
+        const request = await cartsDao.save()
+        res.status(201).json({ message: 'the cart has been succesfully created', cartId: request })
     } catch (error) {
         let msg = (error).message;
         return res.status(400).json({ error: msg });
     }
-});
+})
 
 
 router.delete('/:id', async (req, res) => {
-    const {
-        params: { id }
-    } = req
+    const { id } = req.params
     try {
-        const response = await carts.deleteById(Number(id))
+        const response = await cartsDao.deleteById(id)
         res.json(response)
     } catch (error) {
         let msg = (error).message;
@@ -53,43 +50,29 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-router.get('/:id/productos', async (req, res) => {
-    const {
-        params: { id }
-    } = req
+router.post('/:idCart/:idProduct', async (req, res) => {
+    const { idCart, idProduct } = req.params
     try {
-        const { products } = await cartDao.getById(Number(id))
-        res.json(products)
+        const product = await productsDao.getById(idProduct)
+        const request = await cartsDao.saveProduct(idCart, product)
+        res.status(201).json(product)
     } catch (error) {
         let msg = (error).message;
         return res.status(400).json({ error: msg });
     }
 });
 
-router.post('/:id', async (req, res) => {
-    const { params: { id } } = req
+router.delete('/:idCart/:idProduct', async (req, res) => {
+    const {  idCart, idProduct } = req.params
     try {
-        const product = await productsDao.getById(id)
-        const request = await cartsDao.saveProduct(product)
-        res.status(201).json(request)
-    } catch (error) {
-        let msg = (error).message;
-        return res.status(400).json({ error: msg });
-    }
-});
-
-router.delete('/:id/productos/:id_prod', async (req, res) => {
-    const {
-        params: { id, id_prod }
-    } = req
-    try {
-        const response = await carts.deleteProdInCart(Number(id), Number(id_prod))
+        const response = await cartsDao.deleteProdInCart(idCart, idProduct)
         res.json(response)
     } catch (error) {
         let msg = (error).message;
         return res.status(400).json({ error: msg });
     }
 });
+
 
 
 export default router;

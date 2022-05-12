@@ -70,5 +70,7 @@ db.products.updateMany({price: {$gt: 4000}}, {$set: {"stock" : 100}})
 
 db.products.deleteMany({price: {$lt: 1000}})
 
+db.carts.updateOne({"_id": ObjectId("627ac3adeaddfcdf48c611a7")}, {$push:{"productsIn": product}})
 
+db.carts.updateOne({_id: idCart }, {$pull:{results: {$elemMatch:{productsIn: idProduct}}}}
 
