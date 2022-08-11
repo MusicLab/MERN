@@ -72,5 +72,38 @@ db.products.deleteMany({price: {$lt: 1000}})
 
 db.carts.updateOne({"_id": ObjectId("627ac3adeaddfcdf48c611a7")}, {$push:{"productsIn": product}})
 
-db.carts.updateOne({_id: idCart }, {$pull:{results: {$elemMatch:{productsIn: idProduct}}}}
+db.carts.updateOne({_id: 627b4ea94f3e51786dd2227a }, {$pull:{productsIn: {$elemMatch:{_id: 6277ef89e6422e36a02a55c0}}}}
 
+
+db.carts.updateMany({_id: 627b4ea94f3e51786dd2227a }, {"productsIn.6277ef89e6422e36a02a55c0" :1})
+
+
+db.carts.updateOne({"_id": "627d7602a7c0536e0b89eddd" }, {$pull:{"productsIn": {"_id": "6277ef89e6422e36a02a55c4"}}
+
+
+[
+    {
+        "_id": "627d7602a7c0536e0b89eddd",
+        "__v": 0,
+        "productsIn": [
+            {
+                "_id": "6277ef89e6422e36a02a55c1",
+                "name": "Final Fantasy VII",
+                "price": 1600,
+                "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPJbL5flgC2clL41VOCwkgITKVWlFUCqgaQg&usqp=CAU",
+                "code": "Afd599",
+                "description": "El segundo mejor juego de la historia",
+                "stock": 55
+            },
+            {
+                "_id": "6277ef89e6422e36a02a55c4",
+                "name": "Conkers Bad Fur Day",
+                "price": 3800,
+                "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8hc0om0qJxgUuEuq0KZN5Ed1RbentP41QOQ&usqp=CAU",
+                "code": "AFd602",
+                "description": "Juegaso under",
+                "stock": 10
+            }
+        ]
+    }
+]
